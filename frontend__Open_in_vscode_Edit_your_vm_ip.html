@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table tr td {
+            border: 1px black solid;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>pclass</th>
+                <th>survived</th>
+                <th>pname</th>
+                <th>sex</th>
+                <th>age</th>
+                <th>sibsp</th>
+                <th>parch</th>
+                <th>ticket</th>
+                <th>fare</th>
+                <th>cabin</th>
+                <th>embarked</th>
+                <th>boat</th>
+                <th>body</th>
+                <th>homedest</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        let local = 'http://127.0.0.1:5000/titanic';
+        let docker = 'http://192.168.24.6:5000/titanic';
+        fetch('http://192.168.24.6:5000/titanic', {
+            method: 'GET'
+        }).then(function (response) {
+            return response.json();
+        }).then(function (arr) {
+            let tbody = document.querySelector('table > tbody');
+            tbody.innerHTML = '';
+
+            for (let o of arr) {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                <td>${o['id']}</td>
+                <td>${o['pclass']}</td>
+                <td>${o['survived']}</td>
+                <td>${o['pname']}</td>
+                <td>${o['sex']}</td>
+                <td>${o['age']}</td>
+                <td>${o['sibsp']}</td>
+                <td>${o['parch']}</td>
+                <td>${o['ticket']}</td>
+                <td>${o['fare']}</td>
+                <td>${o['cabin']}</td>
+                <td>${o['embarked']}</td>
+                <td>${o['boat']}</td>
+                <td>${o['body']}</td>
+                <td>${o['homedest']}</td>
+                `;
+                tbody.appendChild(tr);
+            }
+        });
+
+
+
+    </script>
+</body>
+
+</html>
